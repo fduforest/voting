@@ -12,7 +12,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 1. Registering Voters Session Testing ::::::::::::: //
 
-  describe.skip("1. Registering Voters Session Testing", () => {
+  describe("1. Registering Voters Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
     })
@@ -136,7 +136,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if the caller is not a registered voter", async () => {
       await expectRevert(
-        deployedVotingInstance.addProposal("Dogecoin", {
+        votingInstance.addProposal("Dogecoin", {
           from: fifth,
         }),
         "You're not a voter"
@@ -163,7 +163,7 @@ contract("Voting", (accounts) => {
 
     it("should revert if endProposalsRegistering() isn't called by contract owner", async () => {
       await expectRevert(
-        deployedVotingInstance.endProposalsRegistering({ from: second }),
+        votingInstance.endProposalsRegistering({ from: second }),
         "Ownable: caller is not the owner."
       )
     })
@@ -181,8 +181,8 @@ contract("Voting", (accounts) => {
 
     it("should Revert if the proposals registration is not open yet", async () => {
       await expectRevert(
-        deployedVotingInstance.addProposal("Litecoin", {
-          from: owner,
+        votingInstance.addProposal("Litecoin", {
+          from: second,
         }),
         "Proposals are not allowed yet"
       )
@@ -191,7 +191,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 3. Voting & tally Session Testing ::::::::::::: //
 
-  describe.skip("3. Voting & Tally Session Testing", () => {
+  describe("3. Voting & Tally Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
       deployedVotingInstance = await Voting.deployed()
