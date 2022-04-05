@@ -115,11 +115,12 @@ contract("Voting", (accounts) => {
 
       console.log("Get a single proposal")
       const storedData = await votingInstance.getOneProposal(0)
+      console.log(storedData.description)
       expect(storedData.description).to.equal("Alyra")
 
       console.log("Get event proposal added")
       expectEvent(findEvent, "ProposalRegistered", {
-        proposalId: 0,
+        proposalId: new BN(0),
       })
     })
 
