@@ -12,7 +12,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 1. Registering Voters Session Testing ::::::::::::: //
 
-  describe("1. Registering Voters Session Testing", () => {
+  describe.skip("1. Registering Voters Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
     })
@@ -136,7 +136,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if the caller is not a registered voter", async () => {
       await expectRevert(
-        votingInstance.addProposal("Dogecoin", {
+        deployedVotingInstance.addProposal("Dogecoin", {
           from: fifth,
         }),
         "You're not a voter"
@@ -154,7 +154,7 @@ contract("Voting", (accounts) => {
 
     it("should revert if getOneProposal() isn't called by a voter", async () => {
       await expectRevert(
-        votingInstance.getOneProposal(0, { from: owner }),
+        deployedVotingInstance.getOneProposal(0, { from: owner }),
         "You're not a voter"
       )
     })
@@ -163,7 +163,7 @@ contract("Voting", (accounts) => {
 
     it("should revert if endProposalsRegistering() isn't called by contract owner", async () => {
       await expectRevert(
-        votingInstance.endProposalsRegistering({ from: second }),
+        deployedVotingInstance.endProposalsRegistering({ from: second }),
         "Ownable: caller is not the owner."
       )
     })
@@ -181,7 +181,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if the proposals registration is not open yet", async () => {
       await expectRevert(
-        await votingInstance.addProposal("Litecoin", {
+        deployedVotingInstance.addProposal("Litecoin", {
           from: owner,
         }),
         "Proposals are not allowed yet"
@@ -191,7 +191,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 3. Voting & tally Session Testing ::::::::::::: //
 
-  describe("3. Voting & Tally Session Testing", () => {
+  describe.skip("3. Voting & Tally Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
       deployedVotingInstance = await Voting.deployed()
@@ -305,7 +305,7 @@ contract("Voting", (accounts) => {
 
     it("should revert if tallyVotes() isn't called by contract owner", async () => {
       await expectRevert(
-        await votingInstance.tallyVotes({ from: second }),
+        votingInstance.tallyVotes({ from: second }),
         "Ownable: caller is not the owner."
       )
     })
