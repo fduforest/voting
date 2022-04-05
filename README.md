@@ -2,8 +2,8 @@
 
 ## Unit tests
 
-21 tests valides
-9 tests non valides :(
+29 tests valides
+1 tests non valide :(
 
 Toutes les fonctions du contrat sont testées
 
