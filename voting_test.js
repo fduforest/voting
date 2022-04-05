@@ -12,7 +12,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 1. Registering Voters Session Testing ::::::::::::: //
 
-  describe.skip("1. Registering Voters Session Testing", () => {
+  describe("1. Registering Voters Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
     })
@@ -76,7 +76,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 2. Proposals Session Testing ::::::::::::: //
 
-  describe.skip("2. Proposals Session Testing", () => {
+  describe("2. Proposals Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
       deployedVotingInstance = await Voting.new({ from: owner })
@@ -194,6 +194,7 @@ contract("Voting", (accounts) => {
   describe("3. Voting & Tally Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
+      deployedVotingInstance = await Voting.deployed()
       await votingInstance.addVoter(owner, { from: owner })
       await votingInstance.addVoter(second, { from: owner })
       await votingInstance.addVoter(third, { from: owner })
@@ -324,7 +325,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if current status is not voting session ended", async () => {
       await expectRevert(
-        await votingInstance.tallyVotes({ from: owner }),
+        await deployedVotingInstance.tallyVotes({ from: owner }),
         "Current status is not voting session ended"
       )
     })
