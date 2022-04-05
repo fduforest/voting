@@ -12,7 +12,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 1. Registering Voters Session Testing ::::::::::::: //
 
-  describe("1. Registering Voters Session Testing", () => {
+  describe.skip("1. Registering Voters Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
     })
@@ -76,7 +76,7 @@ contract("Voting", (accounts) => {
 
   // ::::::::::::: 2. Proposals Session Testing ::::::::::::: //
 
-  describe("2. Proposals Session Testing", () => {
+  describe.skip("2. Proposals Session Testing", () => {
     before(async () => {
       votingInstance = await Voting.new({ from: owner })
       deployedVotingInstance = await Voting.new({ from: owner })
@@ -316,7 +316,7 @@ contract("Voting", (accounts) => {
       const winningProposalID = await votingInstance.winningProposalID()
       expect(new BN(winningProposalID)).to.be.bignumber.equal(new BN(1))
       console.log("Get event")
-      expectEvent(findEndEvent, "WorkflowStatusChange", {
+      expectEvent(findEvent, "WorkflowStatusChange", {
         previousStatus: Voting.WorkflowStatus.VotingSessionEnded.toString(),
         newStatus: Voting.WorkflowStatus.VotesTallied.toString(),
       })
