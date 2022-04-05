@@ -136,7 +136,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if the caller is not a registered voter", async () => {
       await expectRevert(
-        await votingInstance.addProposal("Dogecoin", {
+        votingInstance.addProposal("Dogecoin", {
           from: fifth,
         }),
         "You're not a voter"
@@ -145,7 +145,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if the proposal description is empty", async () => {
       await expectRevert(
-        await votingInstance.addProposal("", {
+        votingInstance.addProposal("", {
           from: owner,
         }),
         "Vous ne pouvez pas ne rien proposer"
@@ -296,7 +296,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if the voting session is ended or not started", async () => {
       await expectRevert(
-        await votingInstance.setVote(1, { from: fourth }),
+        votingInstance.setVote(1, { from: fourth }),
         "Voting session havent started yet"
       )
     })
@@ -325,7 +325,7 @@ contract("Voting", (accounts) => {
 
     it("should Revert if current status is not voting session ended", async () => {
       await expectRevert(
-        await deployedVotingInstance.tallyVotes({ from: owner }),
+        deployedVotingInstance.tallyVotes({ from: owner }),
         "Current status is not voting session ended"
       )
     })
